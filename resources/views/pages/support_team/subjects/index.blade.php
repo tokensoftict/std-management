@@ -30,12 +30,15 @@
                                 <div class="form-group row">
                                     <label for="name" class="col-lg-3 col-form-label font-weight-semibold">Name <span class="text-danger">*</span></label>
                                     <div class="col-lg-9">
+                                        <input id="name" required name="name" value="{{ old('name') }}" type="text" class="form-control" placeholder="English Math">
+                                        {{--
                                         <select id="name" name="name" class="form-control">
                                             <option value="">-Select Subject-</option>
                                             @foreach($general_subjects as $subject)
                                                 <option {{ old('name') == $subject->name ? "selected" : "" }} value="{{ $subject->name }}">{{ $subject->name }}</option>
                                             @endforeach
                                         </select>
+                                        --}}
                                     </div>
                                 </div>
 
