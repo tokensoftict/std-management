@@ -46,7 +46,7 @@ class ImportStudentData implements ToCollection, WithEvents, WithHeadingRow
                     'name' => ucwords($student['first_name'].' '.$student['middle_name'].' '.$student['last_name']),
                     'gender' => $student['gender'],
                     'adm_no' => $student['adm_no'],
-                    'nal_id' => 130,
+                    'nal_id' => 1,
                     'state_id' => 24,
                     'user_type' => 'student',
                     'code' => $student['adm_no'],
