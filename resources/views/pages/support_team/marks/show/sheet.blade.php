@@ -26,10 +26,14 @@
 
     <tbody>
     @foreach($subjects as $sub)
+        @php
+           $mymarks = $marks->where('subject_id', $sub->id)->where('exam_id', $ex->id);
+           if($mymarks->count() == 0) continue;
+        @endphp
         <tr>
             <td>{{ $loop->iteration }}</td>
             <td>{{ $sub->name }}</td>
-            @foreach($marks->where('subject_id', $sub->id)->where('exam_id', $ex->id) as $mk)
+            @foreach($mymarks as $mk)
                 <td>{{ ($mk->t3) ?: '-' }}</td>
                 <td>{{ ($mk->t1) ?: '-' }}</td>
                 <td>{{ ($mk->t2) ?: '-' }}</td>

@@ -10,11 +10,13 @@
         <span>1 - Poor</span> <br>
     </div>
 --}}
-    <table  style="width:33%; border-collapse:collapse; border: 1px solid #000; margin:10px 0px;" border="1">
+
+    <div class="result-sheet" style="width: 450px;">
+        <table class="result-table" style="width: 100%">
         <thead>
         <tr>
-            <td><strong>AFFECTIVE TRAITS</strong></td>
-            <td><strong>RATING</strong></td>
+            <th><strong>AFFECTIVE TRAITS</strong></th>
+            <th><strong>RATING</strong></th>
         </tr>
         </thead>
         <tbody>
@@ -26,12 +28,14 @@
         @endforeach
         </tbody>
     </table>
+    </div>
 
-    <table  style="width:34%; border-collapse:collapse;border: 1px solid #000;  margin: 10px 0px;" border="1">
+    <div class="result-sheet"  style="width: 450px;">
+        <table class="result-table" style="width: 100%">
         <thead>
         <tr>
-            <td><strong>PSYCHOMOTOR</strong></td>
-            <td><strong>RATING</strong></td>
+            <th><strong>PSYCHOMOTOR</strong></th>
+            <th><strong>RATING</strong></th>
         </tr>
         </thead>
         <tbody>
@@ -44,3 +48,4 @@
         </tbody>
     </table>
 
+</div>

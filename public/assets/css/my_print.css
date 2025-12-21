@@ -1,51 +1,204 @@
-.container {
+/* ===== HEADER TEXT ENHANCEMENT ===== */
+.result-header {
+    width: 100%;
+    border-bottom: 3px solid #0d47a1;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-collapse: collapse;
+}
+
+.result-header td {
+    vertical-align: middle;
+    padding: 6px;
+}
+
+.school-info {
+    text-align: center;
+    line-height: 1.25;
+}
+/* ===== SCHOOL LOGO ===== */
+.school-logo {
+    width: 100px;               /* Fixed width for balance */
+    text-align: left;
+}
+
+.school-logo img {
+    max-height: 100px;          /* Scales down the logo */
+    width: auto;                /* Maintains aspect ratio */
+    display: block;
+    margin: 0 auto;
+    object-fit: contain;        /* Avoids stretching */
+}
+/* School Name */
+.school-name {
+    font-size: 28px;
+    font-weight: 900;
+    color: #1b0c80;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    text-shadow: 0 1px 0 #ffffff;
+}
+
+/* Motto */
+.school-motto {
+    margin-top: 2px;
+    font-size: 18px;
+    font-style: italic;
+    font-weight: 700;
+    color: #c62828;
+    letter-spacing: 0.8px;
+}
+
+/* Address / Website / Phone */
+.school-address,
+.school-website,
+.school-phone {
+    font-size: 13px;
+    font-weight: 600;
+    color: #000;
+    letter-spacing: 0.4px;
+}
+
+/* Divider Line */
+.header-divider {
+    width: 60%;
+    margin: 6px auto;
+    border-top: 2px solid #0d47a1;
+}
+
+/* Report Title */
+.report-title {
+    margin-top: 6px;
+    display: inline-block;
+    padding: 4px 16px;
+    font-size: 16px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #fff;
+    background: linear-gradient(135deg, #0d47a1, #1e88e5);
+    border-radius: 20px;
+    border: 2px solid #0d47a1;
+}
+
+/* Print Accuracy */
+@media print {
+    .report-title,
+    .school-name {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+}
+
+
+
+
+
+
+
+
+/* ===== RESULT SHEET CARD ===== */
+.result-sheet {
+    width: 100%;                 /* Reduce width to prevent cutting */
+    margin: 12px auto 10px auto;   /* Center on page */
+    background: #ffffff;
+
+    box-sizing: border-box;
+}
+
+/* ===== TABLE ===== */
+.result-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 auto;
+    font-family: "Segoe UI", Tahoma, sans-serif;
     font-size: 10px;
 }
-@media (min-width: 768px) {
-    .container {
-        width: 750px;
-    }
-}
-@media (min-width: 992px) {
-    .container {
-        width: 970px;
-    }
-}
 
-@media (min-width: 1200px) {
-    .container {
-        width: 1170px;
-    }
-}
-
-@media print {
-
-    td, th {
-        padding: 2px;
-        text-align: center;
-        font-size: 10px;
-    }
-
-    @page {
-        size: auto;   /* auto is the initial value */
-        margin: 0;  /* this affects the margin in the printer settings */
-    }
-
-    html {
-        background-color: #FFFFFF;
-        margin: 10px; /* this affects the margin on the html before sending to printer */
-    }
-
-    body {
-        margin: 0 6mm; /* margin you want for the content */
-    }
-}
-
-td {
+/* ===== GRID LINES ===== */
+.result-table th,
+.result-table td {
+    border: 2px solid #0d47a1;  /* Bold grid lines */
+    padding: 2px 2px;
     text-align: center;
 }
 
-table.td-left td{
-    text-align: left!important;
-    padding: 5px;
+/* ===== HEADER ===== */
+.result-table thead th {
+    background: #0d47a1;  /* Deep blue */
+    color: #ffffff;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.2px;
+}
+
+/* ===== ROW COLORS (BOLD & SHARP) ===== */
+.result-table tbody tr:nth-child(odd) {
+    background: #e3f2fd; /* Strong light blue */
+}
+
+.result-table tbody tr:nth-child(even) {
+    background: #bbdefb; /* Deeper blue */
+}
+
+/* ===== SUBJECT COLUMN ===== */
+.result-table td.subject {
+    text-align: left;
+    font-weight: 600;
+}
+
+/* ===== TOTAL / AVERAGE ===== */
+.result-table .highlight {
+    background: #ffeb3b; /* Bright yellow */
+    font-weight: 800;
+}
+
+/* ===== GRADE BADGES ===== */
+.grade {
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-weight: 800;
+    font-size: 12px;
+    display: inline-block;
+    color: #000;
+}
+
+.grade-a { background: #00c853; } /* Bold green */
+.grade-b { background: #64b5f6; }
+.grade-c { background: #ffd600; }
+.grade-d { background: #ff9100; }
+.grade-f { background: #d50000; color: #fff; }
+
+/* ===== FOOTER ===== */
+.result-table tfoot td {
+    background: #0d47a1;
+    color: #fff;
+    font-weight: 700;
+}
+
+@page {
+    size: A4;
+    margin: 5mm 5mm 1mm 5mm; /* top right bottom left */
+}
+/* ===== PRINT SAFETY ===== */
+@media print {
+
+
+    .result-table th,
+    .result-table td {
+        word-break: break-word;     /* force long content to wrap */
+        box-sizing: border-box;
+    }
+
+    table, tr, td, th {
+        page-break-inside: avoid !important;
+    }
+
+    thead {
+        display: table-header-group;
+    }
+
+    tfoot {
+        display: table-footer-group;
+    }
 }

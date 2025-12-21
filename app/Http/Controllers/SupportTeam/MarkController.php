@@ -82,7 +82,7 @@ class MarkController extends Controller
         $d['sr'] = $this->student->getRecord(['user_id' => $student_id])->first();
         $d['my_class'] = $mc = $this->my_class->getMC(['id' => $exr->first()->my_class_id])->first();
         $d['class_type'] = $this->my_class->findTypeByClass($mc->id);
-        $d['subjects'] = $this->my_class->findSubjectByClass($mc->id);
+        $d['subjects'] = $this->my_class->findSubjectByClass($mc->id, 'id');
         $d['year'] = $year;
         $d['student_id'] = $student_id;
         $d['skills'] = $this->exam->getSkillByClassType() ?: NULL;
@@ -122,7 +122,7 @@ class MarkController extends Controller
         $d['class_av'] = 'class_av'.$exam->term;
         $d['sr'] = $sr =$this->student->getRecord(['user_id' => $student_id])->first();
         $d['class_type'] = $this->my_class->findTypeByClass($mc->id);
-        $d['subjects'] = $this->my_class->findSubjectByClass($mc->id);
+        $d['subjects'] = $this->my_class->findSubjectByClass($mc->id, 'id');
 
         $d['ct'] = $ct = $d['class_type']->code;
         $d['year'] = $year;

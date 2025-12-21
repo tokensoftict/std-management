@@ -1,5 +1,7 @@
 
-    <table  style="width:33%; border-collapse:collapse; border: 1px solid #000; margin:10px 0px;" border="1">
+
+<div class="result-sheet"  style="width: 350px;">
+    <table class="result-table" style="width: 100%">
         <thead>
             <tr>
                 <th>SCORE RANGE</th>
@@ -20,7 +22,7 @@
 
         </tbody>
     </table>
-
+</div>
 
 
 {{--
