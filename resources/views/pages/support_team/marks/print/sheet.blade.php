@@ -25,12 +25,12 @@
     <tr>
         <th rowspan="2">SUBJECTS</th>
         <th colspan="4">CONTINUOUS ASSESSMENT</th>
-        <th rowspan="2">EXAM<br>(60%)</th>
-        <th rowspan="2">FINAL MARKS <br> (100%)</th>
-        <th rowspan="2">HIGHEST <br> IN CLASS</th>
-        <th rowspan="2">CLASS <br> AVERAGE</th>
-        <th rowspan="2">GRADE</th>
-        <th rowspan="2">SUBJECT <br> POSITION</th>
+        <th rowspan="2"><br/><br/>EXAM<br>(60%)</th>
+        <th rowspan="2"><br/><br/>FINAL MARKS <br> (100%)</th>
+        <th rowspan="2"><br/><br/>HIGHEST <br> IN CLASS</th>
+        <th rowspan="2"><br/><br/>CLASS <br> AVERAGE</th>
+        <th rowspan="2"><br/><br/>GRADE</th>
+        <th rowspan="2"><br/><br/>SUBJECT <br> POSITION</th>
 
 
 
@@ -44,13 +44,13 @@
         <th rowspan="2">GRADE</th>
         @endif--}}
 
-        <th rowspan="2">REMARKS</th>
+        <th rowspan="2"><br/>REMARKS</th>
     </tr>
     <tr>
-        <th>ASS.(10%)</th>
-        <th>CA1(15%)</th>
-        <th>CA2(15%)</th>
-        <th>TOTAL(40%)</th>
+        <th>ASS.<br/>(10%)</th>
+        <th>CA1<br/>(15%)</th>
+        <th>CA2<br/>(15%)</th>
+        <th>TOTAL<br/>(40%)</th>
     </tr>
     </thead>
     <tbody>

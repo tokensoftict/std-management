@@ -121,6 +121,7 @@
     border: 2px solid #0d47a1;  /* Bold grid lines */
     padding: 2px 2px;
     text-align: center;
+    font-size: 10px;
 }
 
 /* ===== HEADER ===== */
