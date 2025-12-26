@@ -74,7 +74,7 @@ class IntroController extends Controller
             $exr = $this->exam->getRecord($wh);
             $exam = $exr->first();
 
-            return redirect()->route('marks.print', [Qs::hash($user->id),$exam->id,$year]);
+            return redirect()->route('marks.print', [Qs::hash($user->id),$exam->exam_id,$year]);
         }
 
         return back()->withInput()->with('error', __('msg.pin_fail'));
