@@ -31,7 +31,7 @@
                 </td>
 
                 <td class="student-photo">
-                    @if(!empty($sr->user->photo) and $sr->user->photo != Qs::getDefaultUserImage())
+                    @if(!empty($sr->user->photo))
                         <img src="{{ $sr->user->photo }}" alt="Student Photo">
                     @endif
                 </td>
