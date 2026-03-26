@@ -72,7 +72,7 @@
                 <td>{{ $mk->$class_av ?: '-'}}</td>
                 <td>{{ $mk->$h_score ?: '-'}}</td>
                 <td></td>
-                <td></td>
+                <td>{!! ($mk->grade) ? Mk::getSuffix($mk->sub_pos) : '-' !!}</td>
 
                 <td>{{ $mk->grade ? $mk->grade->remark : '-' }}</td>
 
