@@ -74,7 +74,7 @@
                 <td></td>
                 <td></td>
 
-                <td></td>
+                <td>{{ $mk->grade ? $mk->grade->remark : '-' }}</td>
 
                 {{--@if($ex->term == 3)
                     <td>{{ $mk->tex3 ?: '-' }}</td>
