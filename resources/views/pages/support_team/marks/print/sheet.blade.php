@@ -71,7 +71,7 @@
                 <td>{{ $mk->$tex ?: '-'}}</td>
                 <td>{{ $mk->$class_av ?: '-'}}</td>
                 <td>{{ $mk->$h_score ?: '-'}}</td>
-                <td></td>
+                <td><span class="grade grade-{{ strtolower($mk->grade->name ?? "") }}">{{ $mk->grade ? $mk->grade->name : '-' }}</span></td>
                 <td>{!! ($mk->grade) ? Mk::getSuffix($mk->sub_pos) : '-' !!}</td>
 
                 <td>{{ $mk->grade ? $mk->grade->remark : '-' }}</td>
