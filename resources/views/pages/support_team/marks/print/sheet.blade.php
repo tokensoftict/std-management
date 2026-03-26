@@ -62,7 +62,19 @@
         <tr>
             <td style="font-weight: bold">{{ $sub->name }}</td>
             @foreach($myMarks as $mk)
+                <td>{{ $mk->t3 ?: '-' }}</td>
+                <td>{{ $mk->t1 ?: '-' }}</td>
+                <td></td>
+                <td>{{ $mk->tca ?: '-' }}</td>
+                <td>{{ $mk->exm ?: '-' }}</td>
 
+                <td>{{ $mk->$tex ?: '-'}}</td>
+                <td>{{ $mk->$class_av ?: '-'}}</td>
+                <td>{{ $mk->$h_score ?: '-'}}</td>
+                <td><span class="grade grade-{{ strtolower($mk->grade->name) }}">{{ $mk->grade ? $mk->grade->name : '-' }}</span></td>
+                <td>{!! ($mk->grade) ? Mk::getSuffix($mk->sub_pos) : '-' !!}</td>
+
+                <td>{{ $mk->grade ? $mk->grade->remark : '-' }}</td>
 
                 {{--@if($ex->term == 3)
                     <td>{{ $mk->tex3 ?: '-' }}</td>
