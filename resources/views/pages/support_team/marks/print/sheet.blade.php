@@ -64,7 +64,7 @@
             @foreach($myMarks as $mk)
                 <td>{{ $mk->t3 ?: '-' }}</td>
                 <td>{{ $mk->t1 ?: '-' }}</td>
-                <td>{{ $mk->t2 ?: '-' }}</td>
+                <td>{{ $mk->t2 ?? '-' }}</td>
                 <td>{{ $mk->tca ?: '-' }}</td>
                 <td>{{ $mk->exm ?: '-' }}</td>
 
