@@ -60,7 +60,7 @@
             if($myMarks->count() == 0) continue;
         @endphp
         <tr>
-            <td style="font-weight: bold">{{ $sub->name }}</td>
+            <td style="font-weight: bold">{{ $sub->name ?? "" }}</td>
             @foreach($myMarks as $mk)
                 <td>{{ $mk->t3 ?: '-' }}</td>
                 <td>{{ $mk->t1 ?: '-' }}</td>
