@@ -135,8 +135,8 @@ class MarkController extends Controller
         });
 
         //$d['mark_type'] = Qs::getMarkType($ct);
-
-        return view('pages.support_team.marks.print.index', $d);
+        //return view('pages.support_team.marks.print.index', $d);
+        return view('pages.support_team.marks.print.custom.index', $d);
     }
 
     public function selector(MarkSelector $req)
