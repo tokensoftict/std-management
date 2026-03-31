@@ -7,6 +7,7 @@
             background: #FFF;
             min-height: 100vh;
         }
+
         .page-wrapper {
             min-height: 100vh;
             display: flex;
@@ -79,10 +80,10 @@
                                 <a href="{{ route('login') }}" class="btn btn-primary btn-lg">
                                     Admin Login
                                 </a>
-                                <br/>
-                                <a href="{{ route('login') }}" class="btn btn-success btn-lg">
-                                    Student Login
-                                </a>
+                                <br />
+                                <!-- <a href="{{ route('login') }}" class="btn btn-success btn-lg">
+                                                        Student Login
+                                                    </a> -->
                             </div>
                         </div>
                     </div>
@@ -98,16 +99,20 @@
                                         <span class="font-weight-semibold">Oops!</span> {{ session()->get("error") }}
                                     </div>
                                 @endif
-                                <form  action="{{ route('check-result') }}" method="post">
+                                <form action="{{ route('check-result') }}" method="post">
                                     @csrf
                                     <div class="form-group">
                                         <label>Admission Number</label>
-                                        <input type="text" value="{{ old('admission_number') }}" class="form-control" name="admission_number" placeholder="Enter Admission Number" required>
+                                        <input type="text" value="{{ old('admission_number') }}" class="form-control"
+                                            name="admission_number" placeholder="Enter Admission Number" required>
                                     </div>
 
                                     <div class="form-group">
                                         <label>Result Checker PIN</label>
-                                        <input type="text" value="{{ old('pin') }}" name="pin" autocomplete="off" style="text-transform:uppercase" placeholder="XXXXX-XXXXX-XXXXXX" title="XXXXX-XXXXX-XXXXXX" pattern="[A-Za-z0-9]{5}-[A-Za-z0-9]{5}-[A-Za-z0-9]{6}" class="form-control" required>
+                                        <input type="text" value="{{ old('pin') }}" name="pin" autocomplete="off"
+                                            style="text-transform:uppercase" placeholder="SAROD-XXXXXX" title="SAROD-XXXXXX"
+                                            pattern="[A-Za-z0-9]{5}-[A-Za-z0-9]{5}-[A-Za-z0-9]{6}" class="form-control"
+                                            required>
                                     </div>
 
                                     <button type="submit" class="btn btn-blue btn-block btn-lg mt-3">

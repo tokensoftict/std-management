@@ -16,13 +16,13 @@ use Illuminate\Support\Facades\Session;
 class IntroController extends Controller
 {
 
-    protected  $pin, $examIsLocked, $user, $exam;
+    protected $pin, $examIsLocked, $user, $exam;
 
     public function __construct(PinRepo $pin, UserRepo $user, ExamRepo $exam)
     {
         $this->pin = $pin;
         $this->user = $user;
-        $this->exam =  $exam;
+        $this->exam = $exam;
     }
 
     public function index()
@@ -32,18 +32,18 @@ class IntroController extends Controller
 
     public function checkCurrentTermResult(Request $request)
     {
-        if(!$request->isMethod('post')){
+        if (!$request->isMethod('post')) {
             return redirect()->route('home-page');
         }
 
         $user = User::query()->where('code', $request->admission_number)->first();
 
-        if(!$user) {
+        if (!$user) {
             return back()->withInput()->with('error', 'Invalid admission number');
         }
 
         $pin = Pin::query()->where('code', $request->pin)->first();
-        if(!$pin) {
+        if (!$pin) {
             return back()->withInput()->with('error', 'Invalid Result Checker PIN');
         }
 
@@ -53,11 +53,11 @@ class IntroController extends Controller
         $student_id = StudentRecord::query()->where('user_id', $user->id)->first()->id;
 
         $code = $this->pin->findValidCode($request->pin);
-        if($code->count() < 1) {
+        if ($code->count() < 1) {
             $code = $this->pin->getUserPin($request->pin, $user->id, $user->id);
         }
 
-        if($code->count() > 0 && $code->first()->times_used < 6 ) {
+        if ($code->count() > 0 && $code->first()->times_used < 6) {
             $code = $code->first();
             $d['times_used'] = $code->times_used + 1;
             $d['user_id'] = $user->id;
@@ -70,11 +70,11 @@ class IntroController extends Controller
 
             $year = Qs::getCurrentSession();
 
-            $wh = ['student_id' => $user->id, 'year' => $year ];
+            $wh = ['student_id' => $user->id, 'year' => $year];
             $exr = $this->exam->getRecord($wh);
-            $exam = $exr->first();
+            $exam = $exr->last();
 
-            return redirect()->route('marks.print', [Qs::hash($user->id),$exam->exam_id,$year]);
+            return redirect()->route('marks.print', [Qs::hash($user->id), $exam->exam_id, $year]);
         }
 
         return back()->withInput()->with('error', __('msg.pin_fail'));
