@@ -82,8 +82,8 @@
                                 </a>
                                 <br />
                                 <!-- <a href="{{ route('login') }}" class="btn btn-success btn-lg">
-                                                        Student Login
-                                                    </a> -->
+                                                                Student Login
+                                                            </a> -->
                             </div>
                         </div>
                     </div>
@@ -111,8 +111,7 @@
                                         <label>Result Checker PIN</label>
                                         <input type="text" value="{{ old('pin') }}" name="pin" autocomplete="off"
                                             style="text-transform:uppercase" placeholder="SAROD-XXXXXX" title="SAROD-XXXXXX"
-                                            pattern="[A-Za-z0-9]{5}-[A-Za-z0-9]{5}-[A-Za-z0-9]{6}" class="form-control"
-                                            required>
+                                            pattern="[A-Za-z0-9]{5}-[A-Za-z0-9]{6}" class="form-control" required>
                                     </div>
 
                                     <button type="submit" class="btn btn-blue btn-block btn-lg mt-3">

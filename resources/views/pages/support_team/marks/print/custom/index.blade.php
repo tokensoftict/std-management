@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Report Sheet - {{ $sr->user->name }}</title>
@@ -7,8 +8,10 @@
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
 
         :root {
-            --primary-blue: #003087; /* Capville Navy */
-            --secondary-blue: #0072ce; /* Capville Sky Blue */
+            --primary-blue: #003087;
+            /* Capville Navy */
+            --secondary-blue: #0072ce;
+            /* Capville Sky Blue */
             --light-blue-bg: #d9edf7;
             --text-black: #000000;
             --text-gray: #4a4a4a;
@@ -40,9 +43,22 @@
         }
 
         @media print {
-            body { background: none; }
-            .container { margin: 0; padding: 2mm 5mm; width: 210mm; height: 297mm; overflow: hidden; border: none; }
-            .no-print { display: none; }
+            body {
+                background: none;
+            }
+
+            .container {
+                margin: 0;
+                padding: 2mm 5mm;
+                width: 210mm;
+                height: 297mm;
+                overflow: hidden;
+                border: none;
+            }
+
+            .no-print {
+                display: none;
+            }
         }
 
         /* Header Section */
@@ -62,7 +78,7 @@
             border-radius: 50%;
             border: 4px solid white;
             overflow: hidden;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             position: relative;
             z-index: 10;
         }
@@ -274,8 +290,13 @@
             font-weight: 600;
         }
 
-        .row-even { background-color: var(--light-blue-bg); }
-        .row-odd { background-color: white; }
+        .row-even {
+            background-color: var(--light-blue-bg);
+        }
+
+        .row-odd {
+            background-color: white;
+        }
 
         .subject-name-col {
             text-align: left !important;
@@ -398,144 +419,173 @@
             width: 250px;
             display: inline-block;
         }
-
     </style>
 </head>
+
 <body>
 
-<div class="container">
-    {{-- Header Content --}}
-    <div class="header-top">
-        <div class="student-photo-container">
-            <img src="{{ !empty($sr->user->photo) ? $sr->user->photo : Qs::getDefaultUserImage() }}" alt="Student">
+    <div class="container">
+        {{-- Header Content --}}
+        <div class="header-top">
+            <div class="student-photo-container">
+                <img src="{{ !empty($sr->user->photo) ? $sr->user->photo : Qs::getDefaultUserImage() }}" alt="Student">
+            </div>
+
+            <div class="school-identity">
+                <h1>{{ strtoupper(Qs::getSetting('system_name')) }}</h1>
+                <p>{{ ucwords($s['address']) }}</p>
+            </div>
+
+            <div class="school-logo-container">
+                <img src="{{ $s['logo'] }}" alt="Logo">
+            </div>
         </div>
 
-        <div class="school-identity">
-            <h1>{{ strtoupper(Qs::getSetting('system_name')) }}</h1>
-            <p>{{ ucwords($s['address']) }}</p>
+        <div class="identity-bar">
+            <div class="student-info-left">
+                <h2>{{ strtoupper($sr->user->name) }}</h2>
+                <span class="student-id-code">{{ $sr->adm_no }}</span>
+            </div>
+            <div class="report-info-right">
+                <h3>{!! strtoupper(Mk::getSuffix($ex->term)) !!} TERM REPORT SHEET</h3>
+                <span class="session-info">{{ $ex->year }} SESSION</span>
+            </div>
         </div>
 
-        <div class="school-logo-container">
-            <img src="{{ $s['logo'] }}" alt="Logo">
-        </div>
+        {{-- Summary Data --}}
+        <section class="summary-box">
+            {{-- Columns --}}
+            <div class="summary-col">
+                <h4 class="summary-title">BIO DATA</h4>
+                <div class="data-row">
+                    <span class="data-label">GENDER</span>
+                    <span class="data-value">{{ strtoupper($sr->user->gender) }}</span>
+                </div>
+                <div class="data-row">
+                    <span class="data-label">DOB</span>
+                    <span class="data-value">{{ $sr->user->dob ?: '-' }}</span>
+                </div>
+            </div>
+
+            <div class="summary-col">
+                <h4 class="summary-title">SCHOOL PROFILE</h4>
+                <div class="data-row">
+                    <span class="data-label">CLASS - ARM</span>
+                    <span class="data-value">{{ strtoupper($my_class->name) }}</span>
+                </div>
+                <div class="data-row">
+                    <span class="data-label">DEPARTMENT</span>
+                    <span class="data-value">{{ strtoupper($class_type->name) }}</span>
+                </div>
+            </div>
+
+            <div class="summary-col">
+                <h4 class="summary-title">GRADES</h4>
+                <div class="data-row">
+                    <span class="data-label">SCORE - AVERAGE</span>
+                    <span class="data-value">{{ $exr->total }} - {{ $exr->ave }}%</span>
+                </div>
+                <div class="data-row">
+                    <span class="data-label">GRADE - REMARK</span>
+                    <span class="data-value">{!! $exr->pos ? Mk::getSuffix($exr->pos) : '-' !!}</span>
+                </div>
+            </div>
+
+            <div class="summary-col">
+                <h4 class="summary-title">ATTENDANCE</h4>
+                <div class="data-row">
+                    <span class="data-label">SCHOOL ACTIVE DAYS</span>
+                    <span class="data-value">---</span>
+                </div>
+                <div class="data-row">
+                    <span class="data-label">PRESENT - ABSENT</span>
+                    <span class="data-value">---</span>
+                </div>
+            </div>
+
+            <div style="text-align: center;">
+                <div class="qr-wrapper">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data={{ route('marks.show', [Qs::hash($sr->user->id), $year]) }}"
+                        alt="QR Code">
+                </div>
+                <span class="scan-msg">SCAN FOR AUTHENTICITY</span>
+            </div>
+        </section>
+
+        {{-- Results Table --}}
+        <section>
+            <div class="section-separator">
+                <div class="section-icon-title">
+                    <svg class="section-icon" viewBox="0 0 24 24" fill="var(--secondary-blue)">
+                        <path
+                            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-12h2v6h-2zm0 8h2v2h-2z" />
+                    </svg>
+                    <span style="font-size: 11px; font-weight: 800; color: #555;">Total Students - 13</span>
+                </div>
+                <div class="section-icon-title">
+                    <h3>COGNITIVE DOMAIN</h3>
+                </div>
+            </div>
+            @include('pages.support_team.marks.print.custom.sheet')
+        </section>
+
+        {{-- Skills Section --}}
+        <section>
+            <div class="section-separator" style="margin-top: 10px;">
+                <div class="section-icon-title">
+                    <svg class="section-icon" viewBox="0 0 24 24" fill="var(--secondary-blue)">
+                        <path d="M10 2H5v2H3v2H1v2h2v2h2v2h2v2h2v2h2v2h2v-2h2v-2h2v-2h2v-2h2v-2h-2V8h-2V6h-2V4h-2V2z" />
+                    </svg>
+                </div>
+                <div class="section-icon-title">
+                    <h3>AFFECTIVE & PSYCHOMOTOR ASSESSMENT</h3>
+                </div>
+            </div>
+            @include('pages.support_team.marks.print.custom.skills')
+        </section>
+
+        @php
+
+            $score = $exr->total; // e.g., 875
+            $maxScore = 1000; // maximum possible score
+            $percentage = ($score / $maxScore) * 100;
+
+            // Generate principal comment based on percentage
+            if ($percentage >= 90) {
+                $comment = "Excellent performance! Keep up the outstanding work.";
+            } elseif ($percentage >= 80) {
+                $comment = "Very good performance. Aim for even higher next term.";
+            } elseif ($percentage >= 70) {
+                $comment = "Good performance. You can do even better.";
+            } elseif ($percentage >= 60) {
+                $comment = "Fair performance. Put in more effort to improve.";
+            } elseif ($percentage >= 50) {
+                $comment = "Needs improvement. Focus on your weak areas.";
+            } else {
+                $comment = "Poor performance. Serious improvement is required.";
+            }
+
+
+        @endphp
+
+        {{-- Footer --}}
+        <footer class="print-footer">
+            <div class="footer-flex">
+                <div class="resumption-box">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="var(--secondary-blue)">
+                        <path
+                            d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" />
+                    </svg>
+                    <strong style="font-size: 14px;">RESUMPTION DATE:</strong>
+                    <span class="line-placeholder"></span>
+                </div>
+                <div class="footer-large-title">COMMENTS</div>
+            </div>
+            <div style="margin-top: 10px; border-bottom: 1.5px solid #ccc; height: 30px;">
+                {{ $exr->p_comment ?? $comment }}</div>
+        </footer>
     </div>
-
-    <div class="identity-bar">
-        <div class="student-info-left">
-            <h2>{{ strtoupper($sr->user->name) }}</h2>
-            <span class="student-id-code">{{ $sr->adm_no }}</span>
-        </div>
-        <div class="report-info-right">
-            <h3>{!! strtoupper(Mk::getSuffix($ex->term)) !!} TERM REPORT SHEET</h3>
-            <span class="session-info">{{ $ex->year }} SESSION</span>
-        </div>
-    </div>
-
-    {{-- Summary Data --}}
-    <section class="summary-box">
-        {{-- Columns --}}
-        <div class="summary-col">
-            <h4 class="summary-title">BIO DATA</h4>
-            <div class="data-row">
-                <span class="data-label">GENDER</span>
-                <span class="data-value">{{ strtoupper($sr->user->gender) }}</span>
-            </div>
-            <div class="data-row">
-                <span class="data-label">DOB</span>
-                <span class="data-value">{{ $sr->user->dob ?: '-' }}</span>
-            </div>
-        </div>
-
-        <div class="summary-col">
-            <h4 class="summary-title">SCHOOL PROFILE</h4>
-            <div class="data-row">
-                <span class="data-label">CLASS - ARM</span>
-                <span class="data-value">{{ strtoupper($my_class->name) }}</span>
-            </div>
-            <div class="data-row">
-                <span class="data-label">DEPARTMENT</span>
-                <span class="data-value">{{ strtoupper($class_type->name) }}</span>
-            </div>
-        </div>
-
-        <div class="summary-col">
-            <h4 class="summary-title">GRADES</h4>
-            <div class="data-row">
-                <span class="data-label">SCORE - AVERAGE</span>
-                <span class="data-value">{{ $exr->total }} - {{ $exr->ave }}%</span>
-            </div>
-            <div class="data-row">
-                <span class="data-label">GRADE - REMARK</span>
-                <span class="data-value">{!! $exr->pos ? Mk::getSuffix($exr->pos) : '-' !!}</span>
-            </div>
-        </div>
-
-        <div class="summary-col">
-            <h4 class="summary-title">ATTENDANCE</h4>
-            <div class="data-row">
-                <span class="data-label">SCHOOL ACTIVE DAYS</span>
-                <span class="data-value">---</span>
-            </div>
-            <div class="data-row">
-                <span class="data-label">PRESENT - ABSENT</span>
-                <span class="data-value">---</span>
-            </div>
-        </div>
-
-        <div style="text-align: center;">
-            <div class="qr-wrapper">
-                 <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data={{ route('marks.show', [Qs::hash($sr->user->id), $year]) }}" alt="QR Code">
-            </div>
-            <span class="scan-msg">SCAN FOR AUTHENTICITY</span>
-        </div>
-    </section>
-
-    {{-- Results Table --}}
-    <section>
-        <div class="section-separator">
-            <div class="section-icon-title">
-                <svg class="section-icon" viewBox="0 0 24 24" fill="var(--secondary-blue)">
-                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-12h2v6h-2zm0 8h2v2h-2z"/>
-                </svg>
-                <span style="font-size: 11px; font-weight: 800; color: #555;">Total Students - 13</span>
-            </div>
-            <div class="section-icon-title">
-                <h3>COGNITIVE DOMAIN</h3>
-            </div>
-        </div>
-        @include('pages.support_team.marks.print.custom.sheet')
-    </section>
-
-    {{-- Skills Section --}}
-    <section>
-        <div class="section-separator" style="margin-top: 10px;">
-            <div class="section-icon-title">
-                 <svg class="section-icon" viewBox="0 0 24 24" fill="var(--secondary-blue)">
-                    <path d="M10 2H5v2H3v2H1v2h2v2h2v2h2v2h2v2h2v2h2v-2h2v-2h2v-2h2v-2h2v-2h-2V8h-2V6h-2V4h-2V2z"/>
-                </svg>
-            </div>
-            <div class="section-icon-title">
-                <h3>AFFECTIVE & PSYCHOMOTOR ASSESSMENT</h3>
-            </div>
-        </div>
-        @include('pages.support_team.marks.print.custom.skills')
-    </section>
-
-    {{-- Footer --}}
-    <footer class="print-footer">
-        <div class="footer-flex">
-            <div class="resumption-box">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="var(--secondary-blue)">
-                    <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
-                </svg>
-                <strong style="font-size: 14px;">RESUMPTION DATE:</strong>
-                <span class="line-placeholder"></span>
-            </div>
-            <div class="footer-large-title">COMMENTS</div>
-        </div>
-        <div style="margin-top: 10px; border-bottom: 1.5px solid #ccc; height: 30px;"></div>
-    </footer>
-</div>
 
 </body>
+
 </html>
