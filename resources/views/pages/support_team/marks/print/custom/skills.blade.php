@@ -26,7 +26,7 @@
         @endforeach
         
         <div style="text-align: right; margin-top: 10px; font-weight: 800; font-size: 12px; color: var(--secondary-blue);">
-            Affective Score - 73%
+            Affective Score - 
         </div>
     </div>
 
@@ -47,14 +47,14 @@
                 <span class="trait-label">{{ strtoupper($ps->name) }}</span>
                 <div class="rating-options">
                     @for($i=1; $i<=5; $i++)
-                        <div class="circle-rating {{ $rating == $i ? 'selected' : '' }}"></div>
+                        <div class="circle-rating {{ //$rating == $i ? 'selected' : '' }}"></div>
                     @endfor
                 </div>
             </div>
         @endforeach
         
         <div style="text-align: right; margin-top: 10px; font-weight: 800; font-size: 12px; color: var(--secondary-blue);">
-            Psychomotor Score - 87%
+            Psychomotor Score -
         </div>
     </div>
 </div>
